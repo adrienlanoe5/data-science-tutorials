@@ -79,3 +79,11 @@ def deck_number(arg):
         return pd.NA
     else :
         return arg[0]
+
+df["deck_number"]=df["Cabin"].apply(deck_number)
+
+fig, ax = plt.subplots(figsize=(10, 10))
+df.groupby(
+    ['Survived', 'size_boat']
+)['PassengerId'].count().unstack().plot(kind ='bar', ax=ax, figsize = (10, 10))
+st.pyplot(fig)
